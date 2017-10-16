@@ -1,9 +1,10 @@
 /*
 BFS 문제로, queue를 사용하며, 최단경로 문제에 많이 이용된다.
 DFS와 달리 거리를 기준으로 순서대로 방문.
+이 문제의 경우 D,S,L,R operation의 갯수가 거리라고 할 수 있다.
 1. 처음 시작점을 queue에 push
 2. 전체 while loop를 queue가 빌 때까지
-3. queue에서 한개꺼내고 operation에 맞게 next를 계산하고 next 위치에 from고 how를 할당.
+3. queue에서 한개꺼내고 operation에 맞게 next를 계산하고 next 위치에 from과 how를 할당.
 BFS 문제의 경우 크게 보면 배열을 전부 채운다고 생각하면 좋을 것 같다.
 배열이 모두 true로 채워지면 queue가 비워져 문제가 종료된다.
 */
