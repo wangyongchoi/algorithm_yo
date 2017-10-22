@@ -18,7 +18,6 @@ int main()
 		int a,b;
 		scanf("%d %d", &a, &b);
 		adj[a].push_back(b);
-		adj[b].push_back(a);
 	}
 	//test
 	for(int i = 0; i < n+1; ++i)

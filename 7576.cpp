@@ -1,5 +1,9 @@
 /*
-;;;틀렸음!!!!!
+BFS 문제로, 간단한데...
+m n으로 입력이 들어와서
+loop 주의하면 어렵지 않은 문제인듯
+코드 정리할 필요성 있음
+다시 풀것!!
 */
 #include <stdio.h>
 #include <queue>
@@ -10,6 +14,7 @@ using namespace std;
 queue<pair<int,int> > q;
 int box[MAX][MAX];
 int time_box[MAX][MAX];
+
 int main()
 {
     memset(time_box, -1, sizeof(time_box));
@@ -38,7 +43,7 @@ int main()
         q.pop();
         
         //west
-        if(y-1 > 0 && box[x][y-1] != -1 && box[x][y-1] != 1)
+        if(y-1 > 0 && box[x][y-1] == 0)
         {
             box[x][y-1] = 1;
             time_box[x][y-1] = time_box[x][y] + 1;
@@ -47,7 +52,7 @@ int main()
             q.push(make_pair(x,y-1));
         }
         //south
-        if(x+1 <= m+1 && box[x+1][y] != -1 && box[x+1][y] != 1)
+        if(x+1 <= n && box[x+1][y] == 0)
         {
             box[x+1][y] = 1;
             time_box[x+1][y] = time_box[x][y] + 1;
@@ -56,7 +61,7 @@ int main()
             q.push(make_pair(x+1, y));
         }
         //east
-        if(y+1 <= n+1 && box[x][y+1] != -1 && box[x][y+1] != 1)
+        if(y+1 <= m && box[x][y+1] == 0)
         {
             box[x][y+1] = 1;
             time_box[x][y+1] = time_box[x][y] + 1;
@@ -65,7 +70,7 @@ int main()
             q.push(make_pair(x, y+1));
         }
         //north
-        if(x-1 > 0 && box[x-1][y] != -1 && box[x-1][y] != 1)
+        if(x-1 > 0 && box[x-1][y] == 0)
         {
             box[x-1][y] = 1;
             time_box[x-1][y] = time_box[x][y] + 1;
@@ -88,6 +93,7 @@ int main()
             }
         }
     }
+    
     
     printf("%d\n", count);
     return 0;
