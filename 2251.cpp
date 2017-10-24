@@ -1,8 +1,11 @@
+/*
+전부 다 해보면 되는 문제이다.
+BFS로 탐색하고, 2차원 배열로 첫번째 물통과 두번째 물통을 check하면
+세번째 물통은 알 수 있다. (처음에 물의 양이 정해지기 때문)
+*/
 #include <stdio.h>
 #include <queue>
-#include <algorithm>
 #include <utility>
-#include <string.h>
 #define MAX 201
 using namespace std;
 
