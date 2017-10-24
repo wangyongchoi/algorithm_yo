@@ -114,7 +114,7 @@ int main()
         }
     }
     ////
-    printf("%d\n",q.size());
+    printf("\n");
     for(int i = 0; i < n; ++i)
     {
         for(int j = 0; j < m; ++j)
@@ -135,73 +135,79 @@ int main()
         
         int next_n = curr_n + 1;
         int next_m = curr_m;
-        if(next_n < n && check[next_n][next_m] == 0 && map[next_n][next_m] == 1)
+        if(next_n < n && check[next_n][next_m] == 0/* && map[next_n][next_m] == 1*/)
         {
-            check[next_n][next_m] = 2;
-            time_table[next_n][next_m] = time_table[curr_n][curr_m] + 1;
-            q.push(make_pair(next_n, next_m));
-            if(max < time_table[next_n][next_m])
+            if(map[next_n][next_m] == 1)
             {
-                max = time_table[next_n][next_m];
-                v.push_back(max);
+                check[next_n][next_m] = 2;
+                time_table[next_n][next_m] = time_table[curr_n][curr_m] + 1;
+                if(max < time_table[next_n][next_m])
+                {
+                    max = time_table[next_n][next_m];
+                    v.push_back(max);
+                }
+            }else{
+                check[next_n][next_m] = 1;
             }
-        }
-        if(next_n < n && check[next_n][next_m] == 0 && map[next_n][next_m] == 0)
-        {
             q.push(make_pair(next_n, next_m));
+            
         }
         
         next_n = curr_n - 1;
         next_m = curr_m;
-        if(next_n >= 0 && check[next_n][next_m] == 0 && map[next_n][next_m] == 1)
+        if(next_n >= 0 && check[next_n][next_m] == 0/* && map[next_n][next_m] == 1*/)
         {
-            check[next_n][next_m] = 2;
-            time_table[next_n][next_m] = time_table[curr_n][curr_m] + 1;
-            q.push(make_pair(next_n, next_m));
-            if(max < time_table[next_n][next_m])
+            if(map[next_n][next_m] == 1)
             {
-                max = time_table[next_n][next_m];
-                v.push_back(max);
+                check[next_n][next_m] = 2;
+                time_table[next_n][next_m] = time_table[curr_n][curr_m] + 1;
+                if(max < time_table[next_n][next_m])
+                {
+                    max = time_table[next_n][next_m];
+                    v.push_back(max);
+                }
+            }else{
+                check[next_n][next_m] = 1;
             }
-        }
-        if(next_n < n && check[next_n][next_m] == 0 && map[next_n][next_m] == 0)
-        {
             q.push(make_pair(next_n, next_m));
         }
         
         next_n = curr_n;
         next_m = curr_m + 1;
-        if(next_m < m && check[next_n][next_m] == 0 && map[next_n][next_m] == 1)
+        if(next_m < m && check[next_n][next_m] == 0/* && map[next_n][next_m] == 1*/)
         {
-            check[next_n][next_m] = 2;
-            time_table[next_n][next_m] = time_table[curr_n][curr_m] + 1;
-            q.push(make_pair(next_n, next_m));
-            if(max < time_table[next_n][next_m])
+            if(map[next_n][next_m] == 1)
             {
-                max = time_table[next_n][next_m];
-                v.push_back(max);
+                check[next_n][next_m] = 2;
+                time_table[next_n][next_m] = time_table[curr_n][curr_m] + 1;
+                if(max < time_table[next_n][next_m])
+                {
+                    max = time_table[next_n][next_m];
+                    v.push_back(max);
+                }
+            }else{
+                check[next_n][next_m] = 1;
             }
-        }
-        if(next_n < n && check[next_n][next_m] == 0 && map[next_n][next_m] == 0)
-        {
             q.push(make_pair(next_n, next_m));
+                
         }
         
         next_n = curr_n;
         next_m = curr_m - 1;
-        if(next_m >= 0 && check[next_n][next_m] == 0 && map[next_n][next_m] == 1)
+        if(next_m >= 0 && check[next_n][next_m] == 0/* && map[next_n][next_m] == 1*/)
         {
-            check[next_n][next_m] = 2;
-            time_table[next_n][next_m] = time_table[curr_n][curr_m] + 1;
-            q.push(make_pair(next_n, next_m));
-            if(max < time_table[next_n][next_m])
+            if(map[next_n][next_m] == 1)
             {
-                max = time_table[next_n][next_m];
-                v.push_back(max);
+                check[next_n][next_m] = 2;
+                time_table[next_n][next_m] = time_table[curr_n][curr_m] + 1;
+                if(max < time_table[next_n][next_m])
+                {
+                    max = time_table[next_n][next_m];
+                    v.push_back(max);
+                }
+            }else{
+                check[next_n][next_m] = 1;
             }
-        }
-        if(next_n < n && check[next_n][next_m] == 0 && map[next_n][next_m] == 0)
-        {
             q.push(make_pair(next_n, next_m));
         }
     }
