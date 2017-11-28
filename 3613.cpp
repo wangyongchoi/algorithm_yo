@@ -10,19 +10,27 @@ int main()
 	char ch;
 	int upper = 0;
 	cin >> str;
-    for(int i = 0; i < str.length(); ++i)
+    
+    if(str[0] == '_' || isupper(str[0]) || str[str.length()-1] == '_')
+    {
+        cout << "Error!" << endl;
+        return 0;
+    }
+    for(int i = 1; i < str.length(); ++i)
     {
         if(str[i] == '_')
         {
             is_java_type = 1;
-        }
-        if(is_java_type)
-        {
-            if(isupper(str[i]))
+            if(i+1 < str.length() && str[i+1] == '_')
             {
-                cout << "Error!" <<endl;
+                cout << "Error!" << endl;
                 return 0;
             }
+        }
+        if(is_java_type && isupper(str[i]))
+        {
+            cout << "Error!" << endl;
+            return 0;
         }
     }
     
