@@ -1,116 +1,114 @@
 #include <cstdio>
+#include <queue>
 #include <vector>
 #include <functional>
-#include <queue>
-#define MAX 8
+#define MAX 9
+#define BLANK 0
+#define WALL 1
+#define VIRUS 2
 using namespace std;
 
+int n, m;
 int map[MAX][MAX];
 bool check[MAX][MAX];
-vector<pair<int, int> > virus;
-int n, m;
-int wall = 0;
-int dx[4] = {1, 0, 0, -1};
-int dy[4] = {0, 1, -1, 0};
+vector<pair<int, int> > v;
+int d_row[4] = {1, 0, 0, -1};
+int d_col[4] = {0, 1, -1, 0};
 int max_res = 0;
 
-void copy_map(int (*a)[MAX], int (*b)[MAX])
+void bfs()
 {
-    for(int i = 0; i < n; ++i)
+    queue<pair<int, int> > q;
+    for(int i = 0 ; i < v.size(); ++i)
     {
-        for(int j = 0 ; j < m; ++j)
+        q.push(v[i]);
+    }
+
+    while(!q.empty())
+    {
+        int curr_row = q.front().first;
+        int curr_col = q.front().second;
+        q.pop();
+        for(int i = 0; i < 4; ++i)
         {
-            a[i][j] = b[i][j];
+            int next_row = curr_row + d_row[i];
+            int next_col = curr_col + d_col[i];
+            if(next_row < 0 || next_col < 0 || next_row >= n || next_col >= m || map[next_row][next_col] != BLANK)
+                continue;
+            map[next_row][next_col] = VIRUS;
+            q.push(make_pair(next_row, next_col));
         }
     }
 }
-
 int count_map(int (*a)[MAX], int (*b)[MAX])
 {
     int res = 0;
     for(int i = 0; i < n; ++i)
     {
-        for(int j = 0; j < m; ++j)
+        for(int j = 0 ; j < m; ++j)
         {
-            if(a[i][j] == 0)
+            if(a[i][j] == BLANK)
                 res++;
             a[i][j] = b[i][j];
         }
     }
     return res;
 }
-
-void bfs()
+void dfs(int row, int col, int wall)
 {
-    queue<pair<int, int> > q;
-    for(int i = 0; i < virus.size(); ++i)
-        q.push(virus[i]);
-    
-    while(!q.empty())
-    {
-        int curr_x = q.front().first;
-        int curr_y = q.front().second;
-        q.pop();
-        for(int i = 0; i < 4; ++i)
-        {
-            int next_x = curr_x + dx[i];
-            int next_y = curr_y + dy[i];
-            if(next_x < 0 || next_y < 0 || next_x >= n || next_y >= m || map[next_x][next_y] != 0)
-                continue;
-            map[next_x][next_y] = 2;
-            q.push(make_pair(next_x, next_y));
-        }
-    }
-}
+    map[row][col] = WALL;
+    check[row][col] = true;
 
-void dfs(int x, int y, int wall)
-{
-    map[x][y] = 1;
-    check[x][y] = true;
     if(wall == 3)
     {
         int t_map[MAX][MAX];
-        copy_map(t_map, map);
-        
+        for(int i = 0; i < n; ++i)
+        {
+            for(int j = 0 ; j < m; ++j)
+            {
+                t_map[i][j] = map[i][j];
+            }
+        }
+
         bfs();
+
         max_res = max(max_res, count_map(map, t_map));
-        
-        map[x][y] = 0;
-        check[x][y] = false;
+
+        map[row][col] = BLANK;
+        check[row][col] = false;
         return;
     }
 
-    for(int i = x; i < n; ++i)
+    for(int i = row; i < n; ++i)
     {
-        for(int j = 0; j < m; ++j)
+        for(int j = 0 ; j < m; ++j)
         {
-            if(check[i][j] || map[i][j] != 0)
+            if(check[i][j] || map[i][j] != BLANK)
                 continue;
             dfs(i, j, wall+1);
         }
     }
-    
-    map[x][y] = 0;
-    check[x][y] = false;
+    map[row][col] = BLANK;
+    check[row][col] = false;
 }
-
 int main()
 {
     scanf("%d %d", &n, &m);
-    for(int i = 0; i < n; ++i)
+    for(int i = 0 ; i < n; ++i)
     {
-        for(int j = 0; j < m; ++j)
+        for(int j = 0 ; j < m; ++j)
         {
             scanf("%d", &map[i][j]);
-            if(map[i][j] == 2)
-                virus.push_back(make_pair(i, j));
+            if(map[i][j] == VIRUS)
+                v.push_back(make_pair(i, j));
         }
     }
+
     for(int i = 0; i < n; ++i)
     {
-        for(int j = 0; j < m; ++j)
+        for(int j = 0 ; j < m; ++j)
         {
-            if(map[i][j] != 0)
+            if(map[i][j] != BLANK)
                 continue;
             dfs(i, j, 1);
         }
