@@ -73,6 +73,6 @@ int main()
             bfs(i,j,UNHEALTHY);
         }
     }
-    printf("%d %d\n", cnt[0], cnt[1]);
+    printf("%d %d\n", cnt[HEALTHY], cnt[UNHEALTHY]);
     return 0;
 }
