@@ -42,7 +42,7 @@ void bfs()
             }else{//wall
                 if(key)
                 {
-                    dist[next_row][next_col][0] = dist[next_row][next_col][key] + 1;
+                    dist[next_row][next_col][0] = dist[curr_row][curr_col][key] + 1;
                     q.push(make_pair(make_pair(next_row, next_col), 0));
                 }
             }     
