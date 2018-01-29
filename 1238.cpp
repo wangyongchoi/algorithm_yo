@@ -41,8 +41,8 @@ int main()
             continue;
         for(int i = 0; i < map_come[curr_node].size(); ++i)
         {
-            int next_time = map_come[curr_node][i].first;
-            int next_node = map_come[curr_node][i].second;
+            int next_time = map_come[curr_node][i].second;
+            int next_node = map_come[curr_node][i].first;
             if(dist_come[next_node] > curr_time + next_time)
             {
                 dist_come[next_node] = curr_time + next_time;
@@ -64,8 +64,8 @@ int main()
             continue;
         for(int i = 0 ; i < map_go[curr_node].size(); ++i)
         {
-            int next_time = map_go[curr_node][i].first;
-            int next_node = map_go[curr_node][i].second;
+            int next_time = map_go[curr_node][i].second;
+            int next_node = map_go[curr_node][i].first;
             if(dist_go[next_node] > curr_time + next_time)
             {
                 dist_go[next_node] = curr_time + next_time;
