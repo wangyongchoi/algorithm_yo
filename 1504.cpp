@@ -50,7 +50,7 @@ int main()
     }
     scanf("%d %d", &node1, &node2);
 
-    //1->noe1->node2->n
+    //1->node1->node2->n
     long long int res1 = dijkstra(1,node1) + dijkstra(node1,node2) + dijkstra(node2, n);
     //1->node2->node1->n
     long long int res2 = dijkstra(1,node2) + dijkstra(node2,node1) + dijkstra(node1, n);
