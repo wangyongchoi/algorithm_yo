@@ -3,11 +3,10 @@
 #define MAX 20
 #define INF 2147483647;
 using namespace std;
-int n, cnt, food;
-int ans;
+int n, ans;
 bool check[MAX];
 int map[MAX][MAX];
-void dfs(int cnt, int food)
+void dfs(int cnt, int a_cnt)
 {
     if(n == cnt)
     {
@@ -29,13 +28,13 @@ void dfs(int cnt, int food)
         ans = ans < ret ? ans : ret;
         return;
     }
-    if(food > 0)
+    if(a_cnt > 0)
     {
         check[cnt] = true;
-        dfs(cnt+1, food-1);
+        dfs(cnt+1, a_cnt-1);
         check[cnt] = false;
     }
-    dfs(cnt+1, food);
+    dfs(cnt+1, a_cnt);
 }
 int main(void)
 {
